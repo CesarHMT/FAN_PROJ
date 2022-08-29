@@ -1,0 +1,145 @@
+git ls-tree -r master --name-only
+
+mkdir <dir>
+cd <dir>
+git init
+
+git restore <file>
+git add <file>
+git add . 
+git reset .
+git commit -m "Description of commitment"
+the -m enables a commit message as a description <subject line> more extense description dont requires -m
+git log --pretty=format: --name-only --diff-filter=A | sort - | sed '/^$/d'
+
+Connect it to github
+You’ve now got a local git repository. You can use git locally, like that, if you want. But if you want the thing to have a home on github, do the following.
+
+Go to github.
+Log in to your account.
+Click the new repository button in the top-right. You’ll have an option there to initialize the repository with a README file, but I don’t.
+Click the “Create repository” button.
+
+$ git remote add origin git@github.com:username/new_repo
+$ git push -u origin master
+
+
+BasicProcesses on git:
+
+- Forking: is the porcess of making a personal copy of someone's repository on GitHub.
+Click on fork in the upper-right corner, if required the destination choose your personal GitHub account.
+
+we call the rep on github <remote repository>, and the rep on your machine is called <local repository>.
+
+a local repository is a first-class mirror of the remote repository
+
+git clone copies the remote repository to create a local repo which includes both the working directory directory and the special .git directory.
+git clone <repURL> <namelocalrep>
+
+git log
+
+Note: Git does not use monotically increasing revisions numbers, but instead uses a 40-digit SHA1 hash as the commit id.
+
+Even though git is tracking a <file> and knows it has changed, we still must explicitly add the files we want to commit. the option -a command for commit tells git to commit any file which has changed and was previously added to the repo.
+
+git commit -a -m <"Description">
+
+to reset the state of some file that has been commited
+
+git checkout <file>
+
+if we are happy with the actual work we require to push these changes to the remote repo.
+
+git push
+
+What is origin/master? : represents the state of the master branch on the remote origin.
+
+Multi-user Git flow
+
+git pull: performs two actions, it first fetches all the updates and then merges or applies them to the local project. If there are conflicts, the command does not merge all the changes and reports the conflicting content.
+
+commits are changes.
+
+git log --oneline --graph
+this option command line will display a visual graph of the commit history.
+
+Note: is better to use the rebasing, while merging "merges" sets of commits together, rebasing will apply one set of commits and then apply a second set of commits on top of the first set of commits. It creates a more linear commit history.
+
+git pull --rebase
+
+git rebase --continue
+
+------------- Branches and Pull Request ---------------------------
+
+branches and pull requests enable different students to work on different aspects at the project at the same time while keeping their commits separated inthe remote repository on github. SO FAR, ALL OF OUR WORK HAS BEEN ON THE MASTER BRANCH.
+
+CREATING ADDITIONAL BRANCHES CAN ENABLE ONE STUDENT TO WORK ON A NEW FEATURE WHILE ALSO FIXING BUGS ON THE MASTER BRANCH.
+
+git branch -d <branch>
+
+git branch
+
+git checkout <branch>
+
+git branch -a
+
+git push --delete origin <branch>
+
+git fetch
+
+git fech --prune
+
+git checkout -b <branchname>
+
+git log --oneline --graph --decorate
+
+Pushing local branches to the remote repository on GitHub requires slightly more complicated syntax. We need to specify which branch to push to which remote repo.
+
+git push -u origin <branch>
+
+origin: reference to the remote repo.
+
+If someone wants to see your remote repo the process is slightly different:
+cd <workdir>
+git pull --rebase
+git checkout --track origin/<branchname>
+bit branch
+
+Once someone is ready to merge that branch back into the master branch, so it becomes part of the primary project, is necessary a PULLREQUEST that simply this process.
+
+----------you must carefully select the base fork!-----------------
+
+etiqueta ligera 
+
+git tag <tagname> <SHA>
+
+etiqueta anotada
+
+git tag -a <version> <SHA>
+
+git tag -a <version> -m <description> <SHA>
+
+lista de etiquetas en el proyecto
+
+git tag
+
+git tag -l <expcom>
+
+git log --pretty=oneline
+
+reetiquetado de commits
+
+git tag -a -f <version> <SHA>
+
+de manera predeterminada , git push no enviara etiquetas, las etiquetas se tienen que usar explicitamente en git push
+
+git push origin <version>
+
+git checkout <version>
+
+git tag -d <version>
+
+
+
+
+ 
